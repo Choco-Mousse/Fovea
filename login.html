@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — FOVEA Spectacles Tracker</title>
+  <meta name="description" content="FOVEA Spectacles Tracker desktop login page for primary wearers and emergency contacts." />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Auth Stylesheet -->
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body class="auth-body">
+
+
+  <!-- Top Title: FOVEA Spectacles Tracker -->
+  <h1 class="auth-page-title">FOVEA Spectacles Tracker</h1>
+
+  <!-- White Rounded Card -->
+  <div class="auth-card login-card">
+    
+    <!-- Tab Switcher: Primary Wearer | Emergency Contact -->
+    <div class="auth-tab-group" role="tablist">
+      <button type="button" class="auth-tab-pill active" id="tab-primary-wearer" role="tab" aria-selected="true">
+        <!-- Wearer / Profile Circle Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <span>Primary Wearer</span>
+      </button>
+
+      <button type="button" class="auth-tab-pill" id="tab-emergency-contact" role="tab" aria-selected="false">
+        <!-- Shield Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Emergency Contact</span>
+      </button>
+    </div>
+
+    <!-- Inner Heading -->
+    <h2 class="auth-card-title" id="card-heading">Primary Specs Wearer</h2>
+
+    <!-- Login Form -->
+    <form id="login-form" autocomplete="on">
+      
+      <!-- Field 1: Email -->
+      <div class="auth-field">
+        <label for="login-email" class="auth-label-centered">Email</label>
+        <div class="auth-input-wrapper">
+          <span class="auth-input-icon-left">
+            <!-- Mail Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </span>
+          <input 
+            type="email" 
+            id="login-email" 
+            class="auth-input has-left-icon" 
+            placeholder="name@example.com" 
+            required
+            autocomplete="email"
+          />
+        </div>
+      </div>
+
+      <!-- Field 2: Contact Number -->
+      <div class="auth-field">
+        <label for="login-contact" class="auth-label-centered" id="label-contact">Contact Number</label>
+        <div class="auth-input-wrapper">
+          <span class="auth-input-icon-left">
+            <!-- Phone Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="login-contact" 
+            class="auth-input has-left-icon" 
+            placeholder="raja08@gmail.com" 
+            value="raja08@gmail.com"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Field 3: Password -->
+      <div class="auth-field">
+        <div class="auth-label-row">
+          <span class="auth-label-left">Password</span>
+          <a href="#" class="auth-link-forgot" id="forgot-password-link">Forgot pwd?</a>
+        </div>
+        <div class="auth-input-wrapper">
+          <span class="auth-input-icon-left">
+            <!-- Lock Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </span>
+          <input 
+            type="password" 
+            id="login-password" 
+            class="auth-input has-left-icon has-right-icon" 
+            placeholder="••••••" 
+            value="password123"
+            required
+            autocomplete="current-password"
+          />
+          <button type="button" class="auth-input-icon-right" id="toggle-password" title="Toggle password visibility" aria-label="Toggle password visibility">
+            <!-- Eye Off Icon (default) -->
+            <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+            </svg>
+            <!-- Eye Icon (hidden) -->
+            <svg id="eye-on-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="auth-btn-black" id="submit-login-btn">
+        <span id="btn-text">Log In as Primary User</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Footer Link: New user option to register -->
+  <div class="auth-footer-outer">
+    <span>New user?</span>
+    <a href="register.html" id="new-user-register-link">Create an account</a>
+  </div>
+
+  <!-- Toast Message -->
+  <div class="auth-toast" id="auth-toast">
+    <span id="toast-message">Logged in successfully! Redirecting...</span>
+  </div>
+
+  <script>
+    // Tab switching state
+    const tabPrimary = document.getElementById('tab-primary-wearer');
+    const tabEmergency = document.getElementById('tab-emergency-contact');
+    const cardHeading = document.getElementById('card-heading');
+    const btnText = document.getElementById('btn-text');
+    const inputEmail = document.getElementById('login-email');
+    const inputContact = document.getElementById('login-contact');
+    const inputPassword = document.getElementById('login-password');
+    const togglePassword = document.getElementById('toggle-password');
+    const eyeOffIcon = document.getElementById('eye-off-icon');
+    const eyeOnIcon = document.getElementById('eye-on-icon');
+    const loginForm = document.getElementById('login-form');
+    const toast = document.getElementById('auth-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    let currentMode = 'primary'; // 'primary' | 'emergency'
+
+    function setMode(mode) {
+      currentMode = mode;
+      if (mode === 'primary') {
+        tabPrimary.classList.add('active');
+        tabEmergency.classList.remove('active');
+        tabPrimary.setAttribute('aria-selected', 'true');
+        tabEmergency.setAttribute('aria-selected', 'false');
+        cardHeading.textContent = 'Primary Specs Wearer';
+        btnText.textContent = 'Log In as Primary User';
+      } else {
+        tabEmergency.classList.add('active');
+        tabPrimary.classList.remove('active');
+        tabEmergency.setAttribute('aria-selected', 'true');
+        tabPrimary.setAttribute('aria-selected', 'false');
+        cardHeading.textContent = 'Emergency Contact Access';
+        btnText.textContent = 'Log In as Emergency Contact';
+      }
+    }
+
+    tabPrimary.addEventListener('click', () => setMode('primary'));
+    tabEmergency.addEventListener('click', () => setMode('emergency'));
+
+    // Toggle Password Visibility
+    togglePassword.addEventListener('click', () => {
+      const isPassword = inputPassword.getAttribute('type') === 'password';
+      if (isPassword) {
+        inputPassword.setAttribute('type', 'text');
+        eyeOffIcon.style.display = 'none';
+        eyeOnIcon.style.display = 'block';
+      } else {
+        inputPassword.setAttribute('type', 'password');
+        eyeOffIcon.style.display = 'block';
+        eyeOnIcon.style.display = 'none';
+      }
+    });
+
+    // Forgot password handler
+    document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showToast('Password recovery instructions sent to your email.');
+    });
+
+    // Toast helper
+    function showToast(msg, type = 'success') {
+      toastMsg.textContent = msg;
+      toast.className = 'auth-toast show ' + type;
+      setTimeout(() => {
+        toast.className = 'auth-toast';
+      }, 2600);
+    }
+
+    // Form Submission
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = inputEmail.value.trim();
+      const contact = inputContact.value.trim();
+      const password = inputPassword.value;
+
+      if (!contact || !password) {
+        showToast('Please fill in required credentials', 'error');
+        return;
+      }
+
+      // Save session info
+      const sessionUser = {
+        role: currentMode,
+        email: email || 'primary@fovea.io',
+        contact: contact,
+        loginTime: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem('fovea_auth_user', JSON.stringify(sessionUser));
+      } catch (err) {}
+
+      showToast(`Welcome! Verified as ${currentMode === 'primary' ? 'Primary Wearer' : 'Emergency Contact'}. Redirecting...`, 'success');
+
+      // Seamless redirect to dashboard
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
