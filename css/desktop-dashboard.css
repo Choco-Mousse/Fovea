@@ -1,0 +1,2199 @@
+/* ==========================================================================
+   FOVEA - WHITE THEMED DESKTOP DASHBOARD & BLE TRACING
+   Featuring Full Desktop Sidebar, Main Dashboard & "Specs Found" BLE Tracer
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-app: #f4f7fb;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --border-light: #e6edf5;
+  --border-subtle: #f1f5f9;
+
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* The 4 Brightest Neon Kinds from Reference */
+  --neon-magenta: #ff007f;
+  --neon-magenta-glow: rgba(255, 0, 127, 0.55);
+  --neon-magenta-gradient: linear-gradient(135deg, #ff007f 0%, #ff1493 50%, #e60067 100%);
+
+  --neon-blue: #00b0ff;
+  --neon-blue-glow: rgba(0, 176, 255, 0.55);
+  --neon-blue-gradient: linear-gradient(135deg, #00e5ff 0%, #00b0ff 50%, #0088ff 100%);
+
+  --neon-yellow: #ffd600;
+  --neon-yellow-glow: rgba(255, 214, 0, 0.65);
+  --neon-yellow-gradient: linear-gradient(135deg, #fff000 0%, #ffd600 50%, #ffab00 100%);
+
+  --neon-green: #00e676;
+  --neon-green-glow: rgba(0, 230, 118, 0.65);
+  --neon-green-gradient: linear-gradient(135deg, #00ff73 0%, #00e676 50%, #00c853 100%);
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-card: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  --shadow-glow: 0 8px 30px rgba(255, 0, 127, 0.4);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   APP SHELL LAYOUT: SIDEBAR + MAIN WORKSPACE
+   ========================================================================== */
+.app-layout-shell {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* Left Sidebar */
+.desktop-sidebar {
+  width: 240px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.8rem 1.2rem;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 50;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.sidebar-brand-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 0.6rem;
+}
+
+.sidebar-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sidebar-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover {
+  background: #f8fafc;
+  color: var(--text-main);
+}
+
+.sidebar-nav-item.active {
+  background: #ffeef3;
+  color: #ff007f;
+}
+
+.sidebar-nav-item.active svg {
+  color: #ff007f;
+}
+
+/* Sidebar Bottom User Row */
+.sidebar-user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+}
+
+.user-avatar-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.user-avatar-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-welcome-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.user-name-strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   MAIN WORKSPACE & TOP WINDOW BAR
+   ========================================================================== */
+.main-workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.workspace-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: transparent;
+}
+
+/* macOS-style window control dots */
+.window-dots-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.dot.dot-red { background: #ef4444; }
+.dot.dot-yellow { background: #eab308; }
+.dot.dot-green { background: #22c55e; }
+
+/* Right User Tools */
+.top-tools-group {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.bell-notif-btn {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.bell-red-dot {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff007f;
+  border: 1.5px solid #ffffff;
+}
+
+.header-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  padding: 4px 10px 4px 5px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.user-initial-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #bae6fd;
+  color: #0369a1;
+  font-weight: 700;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   VIEW CONTAINER & SWITCHING
+   ========================================================================== */
+.workspace-scroll-area {
+  padding: 0.5rem 2.5rem 2.5rem;
+  flex: 1;
+}
+
+.view-section {
+  display: none;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.view-section.view-active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   VIEW 1: MAIN DASHBOARD (MODEL 1, SPECTS & 4 NEON BUTTONS)
+   ========================================================================== */
+.dashboard-grid-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.dash-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dash-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Model 1 Glowing Pink Pill Button */
+.model-pill-button {
+  width: 100%;
+  background: var(--neon-magenta-gradient);
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 9999px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-align: center;
+  box-shadow: 0 8px 25px var(--neon-magenta-glow), 0 0 15px rgba(255, 0, 127, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.model-pill-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px var(--neon-magenta-glow), 0 0 25px rgba(255, 0, 127, 0.6);
+}
+
+.model-pill-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+/* Specs Connected Card */
+.specs-showcase-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 28px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.specs-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.specs-status-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specs-live-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pulse-dot-green {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: beaconPulse 1.4s infinite ease-in-out;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+.specs-subtitle-lines {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specs-battery-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.battery-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.battery-badge-card .battery-box {
+  width: 22px;
+  height: 12px;
+  border: 1.5px solid #16a34a;
+  border-radius: 3px;
+  position: relative;
+  padding: 1px;
+}
+
+.battery-badge-card .battery-box::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 2px;
+  width: 2px;
+  height: 6px;
+  background: #16a34a;
+}
+
+.battery-badge-card .battery-inner {
+  width: 78%;
+  height: 100%;
+  background: #22c55e;
+  border-radius: 1px;
+}
+
+/* Spectacles Image Stage */
+.spectacles-center-stage {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.spectacles-center-stage img {
+  width: 82%;
+  max-width: 440px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 25px rgba(15, 23, 42, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.spectacles-center-stage:hover img {
+  transform: scale(1.02);
+}
+
+/* Glowing Neon Green LED Light on Temple */
+.led-temple-light {
+  position: absolute;
+  top: 36%;
+  right: 32%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00ff73;
+  box-shadow: 0 0 15px #00ff73, 0 0 35px #00e676, 0 0 65px rgba(0, 230, 118, 0.9);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.led-temple-light.active {
+  animation: strobeGlow 0.35s infinite alternate ease-in-out;
+}
+
+.led-temple-light.inactive {
+  background: #94a3b8;
+  box-shadow: none;
+  opacity: 0.35;
+}
+
+@keyframes strobeGlow {
+  0% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 15px #00ff73; }
+  100% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 30px #00ff73, 0 0 60px #00e676, 0 0 90px #00ff73; }
+}
+
+.buzzer-sound-wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #ffd600;
+  box-shadow: 0 0 20px rgba(255, 214, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.buzzer-sound-wave.ringing {
+  animation: waveEcho 1s ease-out infinite;
+}
+
+@keyframes waveEcho {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+}
+
+/* ==========================================================================
+   THE 4 ICONIC NEON BUTTONS (2x2 GRID)
+   ========================================================================== */
+.neon-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.neon-card-btn {
+  border-radius: 24px;
+  padding: 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  user-select: none;
+}
+
+.neon-card-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.neon-card-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.neon-card-icon {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neon-card-icon svg {
+  color: #ffffff;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.neon-card-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Button 1: GPS */
+.neon-card-btn.card-gps {
+  background: var(--neon-magenta-gradient);
+  box-shadow: 0 10px 30px var(--neon-magenta-glow), 0 0 20px rgba(255, 0, 127, 0.4);
+}
+.neon-card-btn.card-gps:hover {
+  box-shadow: 0 16px 45px var(--neon-magenta-glow), 0 0 35px rgba(255, 0, 127, 0.7);
+}
+
+/* Button 2: BLE */
+.neon-card-btn.card-ble {
+  background: var(--neon-blue-gradient);
+  box-shadow: 0 10px 30px var(--neon-blue-glow), 0 0 20px rgba(0, 176, 255, 0.45);
+}
+.neon-card-btn.card-ble:hover {
+  box-shadow: 0 16px 45px var(--neon-blue-glow), 0 0 35px rgba(0, 212, 255, 0.75);
+}
+
+/* Button 3: Ring Buzzer */
+.neon-card-btn.card-buzzer {
+  background: var(--neon-yellow-gradient);
+  box-shadow: 0 10px 30px var(--neon-yellow-glow), 0 0 20px rgba(255, 214, 0, 0.5);
+}
+.neon-card-btn.card-buzzer .neon-card-text {
+  text-shadow: 0 1px 4px rgba(161, 98, 7, 0.8), 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+.neon-card-btn.card-buzzer:hover {
+  box-shadow: 0 16px 45px var(--neon-yellow-glow), 0 0 40px rgba(255, 214, 0, 0.8);
+}
+
+/* Button 4: Turn on Light */
+.neon-card-btn.card-light {
+  background: var(--neon-green-gradient);
+  box-shadow: 0 10px 30px var(--neon-green-glow), 0 0 20px rgba(0, 230, 118, 0.5);
+}
+.neon-card-btn.card-light:hover {
+  box-shadow: 0 16px 45px var(--neon-green-glow), 0 0 40px rgba(0, 230, 118, 0.8);
+}
+
+/* ==========================================================================
+   VIEW 2: "SPECS FOUND" BLE TRACING SCREEN (MATCHING MEDIA_1790966434457.PNG)
+   ========================================================================== */
+.ble-trace-main-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 28px;
+  padding: 2.2rem 2.8rem;
+  box-shadow: var(--shadow-card);
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Back Arrow & Title Row */
+.trace-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.trace-back-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trace-back-btn:hover {
+  background: #e2e8f0;
+  transform: translateX(-2px);
+}
+
+.trace-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+/* Concentric Radar Wave Canvas (Center Stage) */
+.trace-sonar-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 2.2rem;
+  position: relative;
+}
+
+.concentric-radar-wrap {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Concentric Soft Blue Radar Circles */
+.radar-circle-layer {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.radar-layer-1 {
+  width: 280px;
+  height: 280px;
+  background: rgba(224, 242, 254, 0.45);
+  animation: radarWavePulse 2.8s infinite ease-out;
+}
+
+.radar-layer-2 {
+  width: 210px;
+  height: 210px;
+  background: rgba(186, 230, 253, 0.55);
+  animation: radarWavePulse 2.8s infinite ease-out 0.6s;
+}
+
+.radar-layer-3 {
+  width: 145px;
+  height: 145px;
+  background: rgba(125, 211, 252, 0.55);
+}
+
+@keyframes radarWavePulse {
+  0% { transform: scale(0.92); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(0.92); opacity: 0.6; }
+}
+
+/* Center Blue Circle with Bluetooth Icon */
+.center-bluetooth-beacon {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #0077ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 119, 255, 0.45), 0 0 15px rgba(0, 119, 255, 0.3);
+  z-index: 5;
+  transition: transform 0.2s ease;
+}
+
+.center-bluetooth-beacon.tracing {
+  animation: beaconHeartbeat 1.2s infinite ease-in-out;
+}
+
+@keyframes beaconHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); box-shadow: 0 0 35px rgba(0, 119, 255, 0.7); }
+}
+
+/* Bluetooth Connected Pill Badge below circles */
+.bluetooth-connected-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #e6f9f0;
+  border: 1px solid #bbf7d0;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #059669;
+  margin-top: 1rem;
+}
+
+.badge-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #059669;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+}
+
+/* Status Banner Card (Mint Green Card) */
+.trace-status-mint-card {
+  background: #f0fdf4;
+  border: 1px solid #dcfce7;
+  border-radius: 20px;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.mint-card-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #059669;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.mint-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mint-card-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.mint-card-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Tracing Action Buttons */
+.trace-actions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Primary Button: Play Sound on Specs */
+.btn-play-sound-specs {
+  background: var(--neon-magenta-gradient);
+  color: #ffffff;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 9999px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px var(--neon-magenta-glow), 0 0 15px rgba(255, 0, 127, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-play-sound-specs:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px var(--neon-magenta-glow), 0 0 25px rgba(255, 0, 127, 0.6);
+}
+
+.btn-play-sound-specs:active {
+  transform: scale(0.98);
+}
+
+.btn-icon-play-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #ff007f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+}
+
+/* Secondary Button: Get Directions */
+.btn-get-directions {
+  background: #ffffff;
+  border: 1.5px solid #ff007f;
+  color: #ff007f;
+  padding: 16px 28px;
+  border-radius: 9999px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-get-directions:hover {
+  background: #fff0f5;
+  transform: translateY(-2px);
+}
+
+.btn-get-directions:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   DESKTOP RIGHT COLUMN PANELS (MAP, BLE METER, ACTIVITY)
+   ========================================================================== */
+.dash-panel-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 1.6rem;
+  box-shadow: var(--shadow-card);
+}
+
+.panel-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.panel-title-h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-pill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.tag-red { background: #ffe4e6; color: #ff007f; }
+.tag-blue { background: #e0f2fe; color: #0284c7; }
+
+.map-box-view {
+  position: relative;
+  height: 160px;
+  background: #edf2f7;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 20px 20px;
+  margin-bottom: 0.8rem;
+}
+
+.map-target-pulse {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff007f;
+  animation: beaconPulse 1.4s infinite ease-out;
+}
+
+.map-pin-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.pin-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff007f;
+  box-shadow: 0 0 15px #ff007f;
+}
+
+.pin-caption {
+  background: #ff007f;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.gps-readout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: #f8fafc;
+  padding: 0.8rem;
+  border-radius: 10px;
+}
+
+.activity-feed-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.activity-feed-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+/* ==========================================================================
+   VIEW 3: "GPS TRIGGERED!" SCREEN (MATCHING MEDIA_1790967502467.PNG)
+   ========================================================================== */
+.gps-view-container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* 1. Top Green Success Banner */
+.gps-success-banner {
+  background: #eafaf1;
+  border: 1.5px solid #a7f3d0;
+  border-radius: 22px;
+  padding: 1.1rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);
+}
+
+.gps-success-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.gps-banner-pin-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #00c853;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 200, 83, 0.35);
+}
+
+.gps-banner-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gps-banner-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #047857;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.gps-banner-subtitle {
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.gps-success-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #00c853;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 200, 83, 0.3);
+  flex-shrink: 0;
+}
+
+/* 2. Campus Map Viewport Card */
+.gps-map-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.gps-map-viewport {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #f1f8f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gps-campus-map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+/* Animated Pulse Beacon at Center Fix Marker (51.6%, 54.7%) */
+.gps-pin-pulse-beacon {
+  position: absolute;
+  left: 51.6%;
+  top: 54.7%;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.beacon-pulse-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #ff007f;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: gpsPinPulse 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.beacon-pulse-ring.ring-1 {
+  width: 38px;
+  height: 38px;
+}
+
+.beacon-pulse-ring.ring-2 {
+  width: 65px;
+  height: 65px;
+  animation-delay: 0.7s;
+}
+
+@keyframes gpsPinPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Floating Controls on Top-Right */
+.gps-floating-controls {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.gps-control-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.gps-control-circle-btn:hover {
+  background: #f8fafc;
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.gps-control-circle-btn:active {
+  transform: scale(0.95);
+}
+
+.gps-control-zoom-pill {
+  width: 44px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.gps-zoom-btn {
+  width: 100%;
+  height: 38px;
+  background: transparent;
+  border: none;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gps-zoom-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.gps-zoom-btn:active {
+  background: #e2e8f0;
+}
+
+.gps-zoom-sep {
+  width: 70%;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+/* 3. Bottom Neon Pink Action Button */
+.btn-view-full-map {
+  width: 100%;
+  height: 68px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #ff007f 0%, #ff0066 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem 0 2.2rem;
+  box-shadow: 0 10px 30px rgba(255, 0, 104, 0.42), 0 0 20px rgba(255, 0, 127, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 0.2rem;
+}
+
+.btn-view-full-map:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(255, 0, 104, 0.55), 0 0 28px rgba(255, 0, 127, 0.45);
+}
+
+.btn-view-full-map:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-full-map-center-group {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  gap: 1.2rem;
+}
+
+.map-icon-pin-combo {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-folded-map {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-pin-marker {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  top: 8px;
+  left: 10px;
+}
+
+.btn-map-v-divider {
+  width: 2px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.38);
+  border-radius: 2px;
+}
+
+.btn-map-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.btn-map-arrow-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.btn-view-full-map:hover .btn-map-arrow-box {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   VIEW 4: "PROFILE" SCREEN (MATCHING MEDIA_1790969389054.PNG)
+   ========================================================================== */
+.profile-view-container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 1. Profile Page Header */
+.profile-page-header {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.profile-header-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-header-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-page-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.profile-page-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 2. Profile Hero Gradient Card */
+.profile-hero-card {
+  background: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 38%, #e0f2fe 100%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+  padding: 1.8rem 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card-left {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.hero-avatar-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.hero-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+.hero-camera-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ff007f;
+  border: 2.5px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.4);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-camera-badge:hover {
+  transform: scale(1.1);
+  background: #ff1493;
+}
+
+.hero-user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero-user-name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.hero-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #059669;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.status-dot-green {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+/* Right "Explore More with FOVEA" Badge */
+.hero-card-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.explore-fovea-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 1rem 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.explore-fovea-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.explore-eye-icon-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.explore-eye-svg {
+  width: 34px;
+  height: 34px;
+}
+
+.explore-sparkle-1 {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  color: #ff007f;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.explore-sparkle-2 {
+  position: absolute;
+  top: 4px;
+  right: -16px;
+  color: #ff007f;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.explore-title-text {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.explore-fovea-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explore-brand-text {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.explore-pink-underline {
+  width: 100%;
+  height: 3.5px;
+  background: #ff007f;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+/* 3. Main Two-Column Content Grid */
+.profile-cards-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.8rem;
+  align-items: start;
+}
+
+/* Left Column: Personal Information Card */
+.profile-info-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 1.8rem 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.info-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-header-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-card-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.btn-info-edit {
+  background: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  color: #ff007f;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-info-edit:hover {
+  background: #ffe4e6;
+  transform: scale(1.03);
+}
+
+.personal-info-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.info-row-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0.2rem;
+}
+
+.info-row-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.info-row-label svg {
+  flex-shrink: 0;
+}
+
+.info-row-value {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: right;
+}
+
+/* Right Column: Stacked Cards */
+.profile-side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.profile-side-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: var(--shadow-card);
+}
+
+.side-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.2rem;
+}
+
+.side-header-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.side-card-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Profile Photo Body */
+.photo-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.photo-card-avatar-box {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.1);
+  margin-bottom: 1rem;
+}
+
+.photo-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-change-photo {
+  background: #ffffff;
+  border: 1.5px solid #ff007f;
+  color: #ff007f;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.12);
+  margin-bottom: 0.8rem;
+}
+
+.btn-change-photo:hover {
+  background: #fff1f2;
+  transform: scale(1.03);
+  box-shadow: 0 4px 14px rgba(255, 0, 127, 0.22);
+}
+
+.photo-guidelines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+/* Quick Actions List */
+.quick-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.quick-action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.quick-action-btn:hover {
+  transform: translateX(3px);
+}
+
+.quick-action-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.chevron-icon {
+  transition: transform 0.2s ease;
+}
+
+.quick-action-btn:hover .chevron-icon {
+  transform: translateX(3px);
+}
+
+/* Action 1: Pink */
+.quick-action-btn.action-update {
+  background: #fff1f2;
+  border-color: #ffe4e6;
+  color: #ff007f;
+}
+.quick-action-btn.action-update:hover {
+  background: #ffe4e6;
+  box-shadow: 0 4px 12px rgba(255, 0, 127, 0.12);
+}
+
+/* Action 2: Blue */
+.quick-action-btn.action-password {
+  background: #f0f9ff;
+  border-color: #e0f2fe;
+  color: #0284c7;
+}
+.quick-action-btn.action-password:hover {
+  background: #e0f2fe;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+}
+
+/* Action 3: Purple */
+.quick-action-btn.action-logout {
+  background: #faf5ff;
+  border-color: #f3e8ff;
+  color: #7c3aed;
+}
+.quick-action-btn.action-logout:hover {
+  background: #f3e8ff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12);
+}
+
+/* ==========================================================================
+   VIEW 5: "SETTINGS" SCREEN (MATCHING MEDIA_1790970747527.PNG)
+   ========================================================================== */
+.settings-view-container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 1. Settings Page Header */
+.settings-page-header {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.settings-header-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffeef3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.settings-header-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-page-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.settings-page-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 2. Main Two-Column Settings Card */
+.settings-main-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 1.8rem 2rem;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.2rem;
+  align-items: start;
+}
+
+/* Left Inner Navigation Tabs */
+.settings-nav-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid #f1f5f9;
+  padding-right: 1.2rem;
+}
+
+.settings-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.tab-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-tab-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.settings-tab-btn.active {
+  background: #fff1f2;
+  color: #ff007f;
+  font-weight: 700;
+}
+
+.settings-tab-btn.active .tab-btn-left svg {
+  color: #ff007f;
+}
+
+.tab-chevron {
+  color: #ff007f;
+  display: none;
+}
+
+.settings-tab-btn.active .tab-chevron {
+  display: block;
+}
+
+/* Right Content Pane */
+.settings-content-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+}
+
+.settings-subpane {
+  display: none;
+}
+
+.settings-subpane.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* User Header Row */
+.settings-user-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.settings-user-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.settings-user-avatar-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  flex-shrink: 0;
+}
+
+.settings-user-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.settings-user-identity {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-username {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.settings-useremail {
+  font-size: 0.88rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.settings-edit-pill-btn {
+  background: #ffffff;
+  border: 1.5px solid #ff007f;
+  color: #ff007f;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-edit-pill-btn:hover {
+  background: #fff1f2;
+  transform: scale(1.03);
+}
+
+/* Account Settings Section */
+.settings-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.settings-section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.settings-card-table {
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.settings-table-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+.settings-table-row:last-child {
+  border-bottom: none;
+}
+
+.settings-table-row:hover {
+  background: #f8fafc;
+}
+
+.table-row-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.table-row-icon {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-row-label {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.table-row-chevron {
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.settings-table-row:hover .table-row-chevron {
+  transform: translateX(3px);
+  color: #64748b;
+}
+
+/* Toggle Switch Component */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: .25s ease;
+  border-radius: 24px;
+}
+
+.switch-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .25s ease;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.switch-toggle input:checked + .switch-slider {
+  background-color: #10b981;
+}
+
+.switch-toggle input:checked + .switch-slider::before {
+  transform: translateX(20px);
+}
+
+/* Log Out Banner Button */
+.settings-logout-banner-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff1f2;
+  border: 1px solid #ffe4e6;
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: #ff007f;
+  font-weight: 700;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.4rem;
+}
+
+.settings-logout-banner-btn:hover {
+  background: #ffe4e6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 0, 127, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard-grid-layout,
+  .profile-cards-grid,
+  .settings-main-card {
+    grid-template-columns: 1fr;
+  }
+  .settings-nav-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #f1f5f9;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-sidebar {
+    display: none;
+  }
+  .workspace-scroll-area {
+    padding: 1rem;
+  }
+  .neon-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .ble-trace-main-card {
+    padding: 1.5rem;
+  }
+}

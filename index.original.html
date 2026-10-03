@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOVEA — Precision Spects Finder & Optical Companion</title>
+  <meta name="description" content="Engineering Design Project: FOVEA Smart Spectacles Locator. Sub-centimeter UWB precision tracking, acoustic resonance chime, and AI optical frame recommender." />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/opening-scene.css" />
+  <link rel="stylesheet" href="css/radar.css" />
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="body-ambient-bg">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- ==========================================================================
+       CINEMATIC OPENING SCENE (Defocus to Focus & Spects Finder Reveal)
+       ========================================================================== -->
+  <div id="opening-scene">
+    <!-- Blurry field simulating uncorrected eyesight without spectacles -->
+    <div class="optical-blur-field"></div>
+
+    <!-- Skip Intro Button -->
+    <button id="btn-skip-intro" class="opening-skip-btn">
+      Skip Intro <i data-lucide="chevron-right" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+    </button>
+
+    <!-- Rotating optical calibration reticle / diopter ring -->
+    <div class="opening-reticle">
+      <span class="reticle-mark top"></span>
+      <span class="reticle-mark bottom"></span>
+      <span class="reticle-mark left"></span>
+      <span class="reticle-mark right"></span>
+    </div>
+
+    <!-- Center Stage -->
+    <div class="opening-stage">
+      <!-- Live Refraction status badge -->
+      <div class="opening-vision-badge">
+        <span class="vision-pulse-dot"></span> OPTICAL DEFOCUS: SEARCHING SPECTS...
+      </div>
+
+      <!-- FOVEA Logo with Blur-to-Sharpness animation -->
+      <div class="opening-logo-wrapper">
+        <div class="opening-logo-container">
+          <svg class="opening-logo-svg" viewBox="0 0 500 160">
+            <!-- F -->
+            <path d="M 60,35 L 115,35 C 122,35 125,39 125,45 C 125,51 122,55 115,55 L 82,55 L 82,75 L 110,75 C 117,75 120,79 120,85 C 120,91 117,95 110,95 L 82,95 L 82,125 C 82,131 78,135 71,135 C 64,135 60,131 60,125 Z" />
+            <!-- O (Magnifying Glass Lens) -->
+            <g class="fovea-lens" transform="translate(185, 80)">
+              <circle cx="0" cy="0" r="38" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" />
+              <path d="M -18,-18 A 25 25 0 0 1 12,-22" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity="0.8" />
+              <circle cx="-16" cy="-8" r="2.5" fill="currentColor" opacity="0.8" />
+              <path d="M -27,27 L -46,47 C -49,50 -54,50 -57,47 C -60,44 -60,39 -57,36 L -38,17" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <!-- V -->
+            <path d="M 245,35 C 251,35 255,38 257,44 L 285,115 L 313,44 C 315,38 319,35 325,35 C 333,35 338,41 334,49 L 297,130 C 294,135 290,138 285,138 C 280,138 276,135 273,130 L 236,49 C 232,41 237,35 245,35 Z" />
+            <!-- E -->
+            <path d="M 355,35 L 405,35 C 411,35 415,39 415,45 C 415,51 411,55 405,55 L 377,55 L 377,75 L 400,75 C 406,75 410,79 410,85 C 410,91 406,95 400,95 L 377,95 L 377,115 L 405,115 C 411,115 415,119 415,125 C 415,131 411,135 405,135 L 355,135 C 349,135 345,131 345,125 L 345,45 C 345,39 349,35 355,35 Z" />
+            <!-- A -->
+            <path d="M 455,35 C 460,35 464,38 467,44 L 498,125 C 501,131 497,137 490,137 C 484,137 480,133 478,128 L 471,110 L 439,110 L 432,128 C 430,133 426,137 420,137 C 413,137 409,131 412,125 L 443,44 C 446,38 450,35 455,35 Z M 446,92 L 464,92 L 455,67 Z" />
+          </svg>
+        </div>
+        <div class="opening-lens-beam"></div>
+      </div>
+
+      <!-- Typography -->
+      <h2 class="opening-title">Never Lose Sight</h2>
+      <p class="opening-subtitle">
+        Sub-centimeter Ultra-Wideband radar locator designed for lost glasses. Pinpoint your spectacles effortlessly, even before putting them on.
+      </p>
+
+      <!-- CTA Controls -->
+      <div class="opening-actions">
+        <button id="btn-enter-experience" class="btn-enter-experience">
+          <span>Enter FOVEA System</span>
+          <i data-lucide="crosshair"></i>
+        </button>
+
+        <div id="opening-sound-pill" class="opening-sound-pill active">
+          <i data-lucide="volume-2" style="width: 14px; height: 14px;"></i> Audio Feedback Enabled
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Readout in Intro -->
+    <div class="opening-telemetry">
+      <div class="telemetry-row"><span>FREQ:</span> <span class="telemetry-val">6.489 GHz (CH-5 UWB)</span></div>
+      <div class="telemetry-row"><span>SYS_TIME:</span> <span id="telemetry-clock" class="telemetry-val">12:00:00 UTC</span></div>
+      <div class="telemetry-row"><span>NODE_ID:</span> <span class="telemetry-val">FOV-SPEC-CORE-2026</span></div>
+    </div>
+
+    <div class="opening-diopter">
+      DIOPTER RESOLUTION: <br />
+      <span class="diopter-scale">-4.75 D (BLURRED)</span>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MAIN NAVIGATION HEADER
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-link" title="FOVEA Spects Finder">
+        <img src="assets/images/fovea-logo.png" alt="FOVEA Logo" class="brand-logo-img" />
+        <span class="brand-badge">EDP v2.4</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="nav-menu">
+        <li><a href="#radar-section" class="nav-link">Live Radar</a></li>
+        <li><a href="#hardware-section" class="nav-link">Hardware Tech</a></li>
+        <li><a href="#frames-section" class="nav-link">Frame Finder</a></li>
+        <li><a href="#blueprint-section" class="nav-link">Room Map</a></li>
+        <li><a href="#specs-section" class="nav-link">EDP Specs</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <!-- Replay opening intro -->
+        <button id="btn-replay-intro" class="btn-icon-toggle" title="Replay Opening Scene">
+          <i data-lucide="rotate-ccw"></i>
+        </button>
+
+        <!-- Global Audio Toggle -->
+        <button id="btn-nav-audio" class="btn-icon-toggle active" title="Toggle Sound FX">
+          <i data-lucide="volume-2"></i>
+        </button>
+
+        <!-- Primary CTA -->
+        <a href="#radar-section" class="btn-primary-glow">
+          <i data-lucide="radar"></i>
+          <span>Locate Spects</span>
+        </a>
+
+        <!-- Mobile Menu Trigger -->
+        <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== */ -->
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Left Column: Copy & Value Proposition -->
+          <div class="hero-content">
+            <div class="hero-tag">
+              <span class="hero-tag-ping"></span>
+              FOV-Core Transponder v2.4 • Signal: 98% (Online)
+            </div>
+
+            <h1 class="hero-title">
+              Instant Precision Tracking For Your <span class="text-gradient-cyan">Spectacles</span>.
+            </h1>
+
+            <p class="hero-description">
+              When you misplace your glasses, looking for them is nearly impossible without your vision. FOVEA embeds an ultra-lightweight 0.8g micro-transponder into your frame hinge, delivering sub-centimeter acoustic and radar navigation directly to your smartphone.
+            </p>
+
+            <div class="hero-cta-group">
+              <button id="btn-hero-ping" class="btn-primary-glow">
+                <i data-lucide="bell-ring"></i>
+                <span>Quick Ping Spectacles</span>
+              </button>
+
+              <a href="#frames-section" class="btn-secondary-glass">
+                <i data-lucide="glasses"></i>
+                <span>Explore Smart Frames</span>
+              </a>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="hero-metrics-row">
+              <div class="metric-item">
+                <div class="metric-num">0.4<span>m</span></div>
+                <div class="metric-desc">Sub-Meter Precision</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-num">85<span>dB</span></div>
+                <div class="metric-desc">Piezo Acoustic Chirp</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-num">14<span>Mo</span></div>
+                <div class="metric-desc">Autonomous Solar Battery</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right Column: Interactive Holographic Spectacles Display -->
+          <div class="hero-visual-card">
+            <div class="hero-visual-header">
+              <span class="section-badge" style="margin-bottom:0;">
+                <i data-lucide="cpu" style="width:14px; height:14px;"></i> HINGE-CORE SENSOR
+              </span>
+              <div class="hologram-status">
+                <span class="vision-pulse-dot" style="background:#10b981; box-shadow:0 0 8px #10b981;"></span>
+                PAIRED: FOV-SP901
+              </div>
+            </div>
+
+            <!-- Holographic Spectacles Stage -->
+            <div class="spects-hologram-stage">
+              <!-- Custom SVG Vector Spectacles -->
+              <svg class="spects-svg-container" viewBox="0 0 540 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Left Lens Frame -->
+                <rect x="50" y="55" width="160" height="110" rx="35" stroke="#00f0ff" stroke-width="6" fill="rgba(0, 240, 255, 0.05)" />
+                <path d="M 65 75 Q 85 65 140 68" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+                
+                <!-- Bridge -->
+                <path d="M 210 95 C 240 75 270 75 300 95" stroke="#00f0ff" stroke-width="7" stroke-linecap="round" fill="none" />
+                <path d="M 220 102 C 240 90 270 90 290 102" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5" />
+                
+                <!-- Right Lens Frame -->
+                <rect x="300" y="55" width="160" height="110" rx="35" stroke="#00f0ff" stroke-width="6" fill="rgba(0, 240, 255, 0.05)" />
+                <path d="M 315 75 Q 335 65 390 68" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+                
+                <!-- Left Temple Arm -->
+                <path d="M 50 85 C 25 80 10 90 5 110" stroke="#00f0ff" stroke-width="6" stroke-linecap="round" />
+                
+                <!-- Right Temple Arm (With Embedded Micro-Transponder) -->
+                <path d="M 460 85 C 490 80 515 90 530 110" stroke="#00f0ff" stroke-width="6" stroke-linecap="round" />
+
+                <!-- Transponder internal hinge glow indicator -->
+                <circle cx="462" cy="85" r="7" fill="#10b981" />
+              </svg>
+
+              <!-- Interactive Pin Hotspot on the Temple Hinge -->
+              <div class="locator-hinge-pin" title="FOVEA Micro-Transponder">
+                <div class="pin-core"></div>
+                <div class="pin-ring"></div>
+                <div class="pin-tooltip">FOV-UWB Microchip (0.8g)</div>
+              </div>
+            </div>
+
+            <!-- Quick Ping Status Panel -->
+            <div class="hero-quick-ping-panel">
+              <div class="quick-ping-info">
+                <span class="quick-ping-label">ACTIVE SPECTACLE ID</span>
+                <span class="quick-ping-device">Titanium Modern Hex • 0.4m Away</span>
+              </div>
+              <button class="btn-ping-now" onclick="document.getElementById('btn-hero-ping').click()">
+                <i data-lucide="volume-2" style="width:14px; height:14px;"></i> Beep
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         INTERACTIVE RADAR & PROXIMITY FINDER SECTION
+         ========================================================================== -->
+    <section id="radar-section" class="radar-hud-section">
+      <div class="container">
+        
+        <div class="radar-grid-container">
+          
+          <!-- Column 1: Live Radar Sonar Screen -->
+          <div class="radar-dome-card">
+            
+            <div class="radar-screen">
+              <!-- Concentric distance rings -->
+              <div class="radar-ring ring-1"></div>
+              <div class="radar-ring ring-2"></div>
+              <div class="radar-ring ring-3"></div>
+              <div class="radar-ring ring-4"></div>
+
+              <!-- Reticle axes -->
+              <div class="radar-axis-h"></div>
+              <div class="radar-axis-v"></div>
+
+              <!-- Compass markings -->
+              <span class="radar-compass-n">N</span>
+              <span class="radar-compass-s">S</span>
+              <span class="radar-compass-w">W</span>
+              <span class="radar-compass-e">E</span>
+
+              <!-- Sweeping Radar Beam -->
+              <div class="radar-sweep-beam"></div>
+
+              <!-- Center station (Phone/Receiver) -->
+              <div class="radar-center-core"></div>
+
+              <!-- The Target Blip (Spectacles) -->
+              <div id="radar-blip-target" class="radar-blip-target">
+                <div class="radar-blip-beacon">
+                  <div class="radar-blip-pulse"></div>
+                  <i data-lucide="glasses" class="radar-blip-glasses-icon"></i>
+                </div>
+                <div class="radar-blip-tooltip">Living Room Sofa (0.4m)</div>
+              </div>
+            </div>
+
+            <!-- Telemetry Bar below Radar -->
+            <div class="radar-telemetry-bar">
+              <div class="radar-stat-item">
+                <span class="stat-label">DISTANCE</span>
+                <span id="radar-stat-distance" class="stat-value signal-strong">0.4 m</span>
+              </div>
+              <div class="radar-stat-item">
+                <span class="stat-label">SIGNAL (RSSI)</span>
+                <span id="radar-stat-rssi" class="stat-value">-42 dBm</span>
+              </div>
+              <div class="radar-stat-item">
+                <span class="stat-label">BATTERY</span>
+                <span id="radar-stat-battery" class="stat-value signal-strong">94%</span>
+              </div>
+              <div class="radar-stat-item">
+                <span class="stat-label">BAND</span>
+                <span class="stat-value">UWB Ch.5</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Radar Control Console -->
+          <div class="radar-console">
+            
+            <span class="radar-section-pill">
+              <i data-lucide="activity" style="width: 14px; height: 14px;"></i> Precision Sonar Engine
+            </span>
+
+            <h2 class="radar-console-title">
+              Real-Time Directional Finder HUD
+            </h2>
+
+            <p class="radar-console-desc">
+              Select simulated rooms to test how FOVEA triangulates lost frames through ultra-wideband time-of-flight (ToF) and RSSI signal calibration.
+            </p>
+
+            <!-- Room Targets Selection -->
+            <div>
+              <div class="radar-locations-header">Simulated Test Locations:</div>
+              <div class="radar-location-pills">
+                <button class="location-btn active" data-location="sofa">
+                  <i data-lucide="armchair" style="width: 15px; height: 15px;"></i> Living Room Sofa
+                </button>
+                <button class="location-btn" data-location="desk">
+                  <i data-lucide="laptop" style="width: 15px; height: 15px;"></i> Study Desk
+                </button>
+                <button class="location-btn" data-location="coat">
+                  <i data-lucide="shirt" style="width: 15px; height: 15px;"></i> Coat Pocket
+                </button>
+                <button class="location-btn" data-location="car">
+                  <i data-lucide="car" style="width: 15px; height: 15px;"></i> Car Console
+                </button>
+              </div>
+            </div>
+
+            <!-- Proximity Distance Gauge Bar -->
+            <div class="radar-proximity-gauge">
+              <div class="gauge-header">
+                <span class="gauge-title">Proximity Field Strength</span>
+                <span id="gauge-meters" class="gauge-meters">0.4m</span>
+              </div>
+              <div class="gauge-bar-track">
+                <div id="gauge-fill" class="gauge-bar-fill"></div>
+              </div>
+            </div>
+
+            <!-- Remote Action Triggers -->
+            <div class="radar-action-grid">
+              <!-- Chirp Glasses Button -->
+              <button id="btn-action-chirp" class="action-card-btn">
+                <div class="action-card-icon">
+                  <i data-lucide="volume-2"></i>
+                </div>
+                <div>
+                  <div class="action-card-title">Chirp Spectacles</div>
+                  <div class="action-card-sub">85dB Acoustic Resonance</div>
+                </div>
+              </button>
+
+              <!-- Flash LED Beacon -->
+              <button id="btn-action-flash" class="action-card-btn">
+                <div class="action-card-icon">
+                  <i data-lucide="sun"></i>
+                </div>
+                <div>
+                  <div class="action-card-title">Flash LED</div>
+                  <div class="action-card-sub">Strobe Light Beacon</div>
+                </div>
+              </button>
+
+              <!-- Live Proximity Ping Continuous -->
+              <button id="btn-action-tracking" class="action-card-btn">
+                <div class="action-card-icon">
+                  <i data-lucide="radio"></i>
+                </div>
+                <div>
+                  <div class="action-card-title">Proximity Ping</div>
+                  <div class="action-card-sub">Geiger-Style Sonar</div>
+                </div>
+              </button>
+
+              <!-- Safe Zone Geofence -->
+              <button class="action-card-btn" onclick="alert('Geofence Verified: Spectacles are within Safe Home Boundary (Radius: 25m). No left-behind alert triggered.')">
+                <div class="action-card-icon">
+                  <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                  <div class="action-card-title">Geofence Safe</div>
+                  <div class="action-card-sub">Zero-Separation Mode</div>
+                </div>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         HARDWARE & EDP ENGINEERING ARCHITECTURE SECTION
+         ========================================================================== -->
+    <section id="hardware-section" class="hardware-section">
+      <div class="container">
+        
+        <div class="section-header-centered">
+          <span class="section-badge">
+            <i data-lucide="layers" style="width: 14px; height: 14px;"></i> Engineering Design Project
+          </span>
+          <h2 class="section-title">
+            Micro-Transponder <span class="text-gradient-emerald">Hardware Specs</span>
+          </h2>
+          <p class="section-desc">
+            Designed for zero ergonomic compromise. Weighting less than a single gram, the transponder tucks cleanly into standard titanium or acetate hinges without altering frame aesthetics.
+          </p>
+        </div>
+
+        <div class="tech-cards-grid">
+          
+          <div class="tech-card">
+            <div class="tech-card-icon">
+              <i data-lucide="radio"></i>
+            </div>
+            <h3 class="tech-card-title">Dual-Band UWB + BLE</h3>
+            <p class="tech-card-desc">
+              Harnesses IEEE 802.15.4z Ultra-Wideband Channels 5 & 9 for millimeter Time-of-Flight ranging and BLE 5.3 Long-Range background advertising.
+            </p>
+            <div class="tech-card-spec">±5 cm Ranging Accuracy</div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-icon">
+              <i data-lucide="speaker"></i>
+            </div>
+            <h3 class="tech-card-title">Piezo Acoustic Cavity</h3>
+            <p class="tech-card-desc">
+              Custom miniaturized 3.2mm ceramic piezoelectric resonator emits a penetrating 2.8kHz - 3.8kHz acoustic chirp audible through cushions and bags.
+            </p>
+            <div class="tech-card-spec">85 dB SPL @ 10cm</div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-icon">
+              <i data-lucide="sun"></i>
+            </div>
+            <h3 class="tech-card-title">Solar & Kinetic Harvest</h3>
+            <p class="tech-card-desc">
+              A micro photovoltaic strip along the upper rim coupled with a solid-state micro-battery provides up to 14 months of maintenance-free operation.
+            </p>
+            <div class="tech-card-spec">14 Months Autonomous</div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-icon">
+              <i data-lucide="feather"></i>
+            </div>
+            <h3 class="tech-card-title">0.8g Micro Form Factor</h3>
+            <p class="tech-card-desc">
+              Encapsulated in medical-grade biocompatible resin with IP68 waterproof rating. Featherweight construction ensures identical center of gravity.
+            </p>
+            <div class="tech-card-spec">0.82 Grams Net Mass</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         AI FRAME FINDER & SPECTS RECOMMENDER SECTION
+         ========================================================================== -->
+    <section id="frames-section" class="frame-finder-section">
+      <div class="container">
+        
+        <div class="section-header-centered">
+          <span class="section-badge">
+            <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Style & Geometry Engine
+          </span>
+          <h2 class="section-title">
+            AI Frame Finder & <span class="text-gradient-cyan">Face Shape Match</span>
+          </h2>
+          <p class="section-desc">
+            Filter designer spectacles compatible with FOVEA hardware. Select your face shape to find mathematically balanced frame geometries.
+          </p>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="finder-filter-bar">
+          <button class="filter-chip active" data-filter="all">All Styles</button>
+          <button class="filter-chip" data-filter="oval">Oval Face Shape</button>
+          <button class="filter-chip" data-filter="round">Round Face Shape</button>
+          <button class="filter-chip" data-filter="square">Square Face Shape</button>
+          <button class="filter-chip" data-filter="heart">Heart Face Shape</button>
+        </div>
+
+        <!-- Frames Catalog Grid -->
+        <div class="frames-catalog-grid">
+          
+          <!-- Frame 1 -->
+          <div class="frame-card" data-category="oval" data-id="FOV-AERO-01">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <circle cx="120" cy="80" r="50" stroke="#38bdf8" stroke-width="5" fill="rgba(56, 189, 248, 0.08)" />
+                <path d="M 170 80 Q 200 65 230 80" stroke="#38bdf8" stroke-width="5" />
+                <circle cx="280" cy="80" r="50" stroke="#38bdf8" stroke-width="5" fill="rgba(56, 189, 248, 0.08)" />
+                <path d="M 70 80 L 30 75" stroke="#38bdf8" stroke-width="4" />
+                <path d="M 330 80 L 370 75" stroke="#38bdf8" stroke-width="4" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Aero Titanium</h4>
+              <span class="frame-face-match">Best for Oval</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 51mm</span> • <span>Bridge: 19mm</span> • <span>Temple: 145mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">Grade 5 Titanium</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+          <!-- Frame 2 -->
+          <div class="frame-card" data-category="round" data-id="FOV-CYBER-02">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <rect x="70" y="40" width="105" height="80" rx="14" stroke="#10b981" stroke-width="6" fill="rgba(16, 185, 129, 0.08)" />
+                <path d="M 175 65 Q 200 50 225 65" stroke="#10b981" stroke-width="6" />
+                <rect x="225" y="40" width="105" height="80" rx="14" stroke="#10b981" stroke-width="6" fill="rgba(16, 185, 129, 0.08)" />
+                <path d="M 70 55 L 25 55" stroke="#10b981" stroke-width="5" />
+                <path d="M 330 55 L 375 55" stroke="#10b981" stroke-width="5" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Wayfarer Cyber</h4>
+              <span class="frame-face-match">Best for Round</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 54mm</span> • <span>Bridge: 18mm</span> • <span>Temple: 140mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">Bio-Acetate</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+          <!-- Frame 3 -->
+          <div class="frame-card" data-category="square" data-id="FOV-APEX-03">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <path d="M 60 50 C 130 40 170 80 160 115 C 150 140 80 140 65 110 Z" stroke="#00f0ff" stroke-width="5" fill="rgba(0, 240, 255, 0.08)" />
+                <path d="M 160 70 Q 200 60 240 70" stroke="#00f0ff" stroke-width="5" />
+                <path d="M 340 50 C 270 40 230 80 240 115 C 250 140 320 140 335 110 Z" stroke="#00f0ff" stroke-width="5" fill="rgba(0, 240, 255, 0.08)" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Aviator Apex</h4>
+              <span class="frame-face-match">Best for Square</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 58mm</span> • <span>Bridge: 14mm</span> • <span>Temple: 145mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">Surgical Steel</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+          <!-- Frame 4 -->
+          <div class="frame-card" data-category="heart" data-id="FOV-LUMEN-04">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <path d="M 60 45 L 165 65 C 160 120 70 120 60 45 Z" stroke="#a855f7" stroke-width="5" fill="rgba(168, 85, 247, 0.08)" />
+                <path d="M 165 75 Q 200 65 235 75" stroke="#a855f7" stroke-width="5" />
+                <path d="M 340 45 L 235 65 C 240 120 330 120 340 45 Z" stroke="#a855f7" stroke-width="5" fill="rgba(168, 85, 247, 0.08)" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Lumen Cat-Eye</h4>
+              <span class="frame-face-match">Best for Heart</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 53mm</span> • <span>Bridge: 17mm</span> • <span>Temple: 138mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">Crystal Polymer</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+          <!-- Frame 5 -->
+          <div class="frame-card" data-category="oval" data-id="FOV-HEX-05">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <polygon points="115,40 160,65 160,105 115,130 70,105 70,65" stroke="#f59e0b" stroke-width="5" fill="rgba(245, 158, 11, 0.08)" />
+                <path d="M 160 85 Q 200 75 240 85" stroke="#f59e0b" stroke-width="5" />
+                <polygon points="285,40 330,65 330,105 285,130 240,105 240,65" stroke="#f59e0b" stroke-width="5" fill="rgba(245, 158, 11, 0.08)" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Hexagon Prism</h4>
+              <span class="frame-face-match">Best for Oval & Round</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 50mm</span> • <span>Bridge: 21mm</span> • <span>Temple: 142mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">BETA Titanium</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+          <!-- Frame 6 -->
+          <div class="frame-card" data-category="round" data-id="FOV-RIMLESS-06">
+            <span class="frame-badge-smart"><i data-lucide="check" style="width:12px; height:12px; vertical-align:middle;"></i> FOVEA Tagged</span>
+            <div class="frame-preview-area">
+              <svg class="frame-svg-preview" viewBox="0 0 400 160" fill="none">
+                <rect x="75" y="55" width="100" height="70" rx="8" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" stroke-dasharray="4 4" fill="rgba(255, 255, 255, 0.04)" />
+                <path d="M 175 75 Q 200 65 225 75" stroke="#00f0ff" stroke-width="5" />
+                <rect x="225" y="55" width="100" height="70" rx="8" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" stroke-dasharray="4 4" fill="rgba(255, 255, 255, 0.04)" />
+                <circle cx="75" cy="75" r="4" fill="#00f0ff" />
+                <circle cx="325" cy="75" r="4" fill="#00f0ff" />
+              </svg>
+            </div>
+            <div class="frame-info-header">
+              <h4 class="frame-model-name">FOV Phantom Rimless</h4>
+              <span class="frame-face-match">Universal Fit</span>
+            </div>
+            <div class="frame-specs-specs">
+              <span>Lens: 52mm</span> • <span>Bridge: 18mm</span> • <span>Temple: 140mm</span>
+            </div>
+            <div class="frame-cta-row">
+              <span style="font-weight:700; color:#fff;">Ultra-Light 7.4g</span>
+              <button class="btn-test-finder">Test Locator</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         COMPANION APP & BLUEPRINT ROOM LOCATOR
+         ========================================================================== -->
+    <section id="blueprint-section" class="blueprint-section">
+      <div class="container">
+        
+        <div class="blueprint-grid">
+          
+          <div>
+            <span class="section-badge">
+              <i data-lucide="smartphone" style="width: 14px; height: 14px;"></i> Mobile Companion Ecosystem
+            </span>
+            <h2 class="section-title">
+              2D Floorplan & <br /><span class="text-gradient-cyan">Spatial Triangulation</span>
+            </h2>
+            <p class="section-desc" style="margin-bottom: 2rem;">
+              When glasses slip between couch pillows or get left on the patio, simple bluetooth signal meters are too vague. FOVEA computes true spatial X, Y, Z room coordinates onto your apartment blueprint.
+            </p>
+
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+              <li style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="background: rgba(0, 240, 255, 0.1); color: #00f0ff; border-radius: 8px; padding: 6px;">
+                  <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+                </div>
+                <div>
+                  <strong style="color: #fff;">Z-Axis Elevation Awareness:</strong>
+                  <p style="font-size: 0.88rem; color: #94a3b8;">Knows whether your glasses are on top of the desk (1.0m height) or dropped underneath it on the carpet.</p>
+                </div>
+              </li>
+              <li style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 8px; padding: 6px;">
+                  <i data-lucide="bell" style="width: 18px; height: 18px;"></i>
+                </div>
+                <div>
+                  <strong style="color: #fff;">Zero-Separation Geofence:</strong>
+                  <p style="font-size: 0.88rem; color: #94a3b8;">Instantly alerts your watch or phone the second you walk out of your apartment without your glasses.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Floorplan Interactive Card -->
+          <div class="blueprint-map-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #00f0ff;">
+                HOME BLUEPRINT • 2ND FLOOR
+              </span>
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981;">
+                UWB ANCHORS: 3 ONLINE
+              </span>
+            </div>
+
+            <div class="blueprint-floorplan">
+              <div class="room-box room-living">LIVING ROOM (FOUND HERE)</div>
+              <div class="room-box room-office">STUDY / LAB</div>
+              <div class="room-box room-bedroom">BEDROOM</div>
+              <div class="room-box room-hallway">HALL / ENTRANCE</div>
+
+              <!-- Moving Pin for Spectacles -->
+              <div class="blueprint-pin">
+                <div class="blueprint-pin-dot"></div>
+                <div class="blueprint-pin-tag">Spectacles • Sofa Cushion</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================================
+         EDP TECHNICAL SPECIFICATIONS TABLE SECTION
+         ========================================================================== -->
+    <section id="specs-section" style="padding: 7rem 0; background: #060912;">
+      <div class="container">
+        
+        <div class="section-header-centered">
+          <span class="section-badge">
+            <i data-lucide="file-check" style="width: 14px; height: 14px;"></i> Engineering Benchmark Report
+          </span>
+          <h2 class="section-title">
+            Project Technical <span class="text-gradient-cyan">Data Sheet</span>
+          </h2>
+          <p class="section-desc">
+            Formal Engineering Design Project (EDP) specifications, validation metrics, and regulatory test parameters.
+          </p>
+        </div>
+
+        <div class="specs-table-card">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Engineering Subsystem</th>
+                <th>Design Metric / Specification</th>
+                <th>Observed Test Value</th>
+                <th>Compliance Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>RF Transceiver</strong></td>
+                <td>IEEE 802.15.4z UWB Channel 5 (6489.6 MHz) + BLE 5.3</td>
+                <td><span class="spec-val-highlight">6489.4 MHz ±2 ppm</span></td>
+                <td>FCC Part 15 / CE Certified</td>
+              </tr>
+              <tr>
+                <td><strong>Spatial Resolution</strong></td>
+                <td>Sub-decimeter Time-of-Flight (ToF) accuracy</td>
+                <td><span class="spec-val-highlight">± 4.2 cm Radial Error</span></td>
+                <td>Passed Target Criteria</td>
+              </tr>
+              <tr>
+                <td><strong>Acoustic Transducer</strong></td>
+                <td>SMD Ceramic Piezoelectric buzzer (2.8 kHz to 3.8 kHz sweep)</td>
+                <td><span class="spec-val-highlight">85.4 dB SPL @ 10 cm</span></td>
+                <td>Hearing Safety Compliant</td>
+              </tr>
+              <tr>
+                <td><strong>Module Net Weight</strong></td>
+                <td>Target mass under 1.0 gram (Frame balance neutrality)</td>
+                <td><span class="spec-val-highlight">0.82 grams</span></td>
+                <td>ISO Eyewear Neutrality</td>
+              </tr>
+              <tr>
+                <td><strong>Power Architecture</strong></td>
+                <td>Amorphous Silicon Solar Ribbon + 15 mAh Solid-State Cell</td>
+                <td><span class="spec-val-highlight">14.2 Months Standby</span></td>
+                <td>Zero Disassembly Battery</td>
+              </tr>
+              <tr>
+                <td><strong>Environmental Rating</strong></td>
+                <td>Hermetic epoxy conformal coat & silicone seals</td>
+                <td><span class="spec-val-highlight">IP68 (1.5m, 30 min)</span></td>
+                <td>Sweat & Rain Impervious</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ==========================================================================
+       MODAL: TEST FINDER SIMULATION
+       ========================================================================== -->
+  <div id="frame-locator-modal" class="modal-overlay">
+    <div class="modal-content-box">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <span class="section-badge" style="margin-bottom: 0.8rem;">
+        <i data-lucide="radio" style="width: 14px; height: 14px;"></i> HARDWARE TEST BENCH
+      </span>
+
+      <h3 id="modal-frame-title" style="font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem;">FOV Aero Titanium</h3>
+      <p id="modal-frame-id" style="font-family: var(--font-mono); font-size: 0.8rem; color: #00f0ff; margin-bottom: 1.5rem;">
+        Tracker ID: FOV-AERO-01
+      </p>
+
+      <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 14px; padding: 1.2rem; margin-bottom: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-family: var(--font-mono); font-size: 0.82rem;">
+          <div><span style="color:#64748b;">RF LATENCY:</span> <span style="color:#10b981;">14 ms</span></div>
+          <div><span style="color:#64748b;">SIGNAL:</span> <span style="color:#10b981;">-48 dBm</span></div>
+          <div><span style="color:#64748b;">BATTERY:</span> <span style="color:#10b981;">98% Full</span></div>
+          <div><span style="color:#64748b;">GEOFENCE:</span> <span style="color:#10b981;">Secured</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem;">
+        <button id="btn-modal-chirp" class="btn-primary-glow" style="flex: 1; justify-content: center;">
+          <i data-lucide="volume-2"></i>
+          <span>Trigger Test Chirp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand-col">
+          <a href="#" class="brand-link">
+            <img src="assets/images/fovea-logo.png" alt="FOVEA" class="brand-logo-img" />
+          </a>
+          <p class="footer-desc">
+            FOVEA — High-precision optical transponder ecosystem and smart frame locator. An Engineering Design Project (EDP) for B.Tech 3rd Year.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#radar-section" class="footer-link">Live Radar HUD</a></li>
+            <li><a href="#hardware-section" class="footer-link">Micro-Transponder</a></li>
+            <li><a href="#frames-section" class="footer-link">Smart Frame Catalog</a></li>
+            <li><a href="#blueprint-section" class="footer-link">Room Blueprint</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">EDP Deliverables</h4>
+          <ul class="footer-links">
+            <li><a href="#specs-section" class="footer-link">Technical Data Sheet</a></li>
+            <li><a href="#" class="footer-link" onclick="alert('IEEE 802.15.4z UWB standard compliance verified.'); return false;">RF Protocol Validation</a></li>
+            <li><a href="#" class="footer-link" onclick="alert('Biocompatible medical resin ISO 10993 certified.'); return false;">Materials Certification</a></li>
+            <li><a href="#" class="footer-link" onclick="alert('Acoustic decibel limit safety tested below 90dB.'); return false;">Acoustic Safety Log</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Project Status</h4>
+          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; color: #10b981; margin-bottom: 6px;">
+              <span class="vision-pulse-dot" style="background:#10b981;"></span> RADAR CORE ACTIVE
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              Frontend Mid-Term Submission Ready • All Modules Fully Interactive
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 FOVEA Spects Finder • Engineering Design Project (EDP)</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" class="footer-link" style="font-size: 0.8rem;">Privacy & Cryptography</a>
+          <a href="#" class="footer-link" style="font-size: 0.8rem;">EDP Documentation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/radar-audio.js"></script>
+  <script src="js/opening-scene.js"></script>
+  <script src="js/radar-finder.js"></script>
+  <script src="js/frame-finder.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

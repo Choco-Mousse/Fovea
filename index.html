@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOVEA — Smart Spects Finder Dashboard & BLE Tracing</title>
+  <meta name="description" content="FOVEA Spectacles Finder Desktop Dashboard. Featuring real-time BLE tracing, concentric radar waves, and the 4 iconic high-voltage neon buttons." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/desktop-dashboard.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       APP SHELL: SIDEBAR + MAIN WORKSPACE
+       ========================================================================== -->
+  <div class="app-layout-shell">
+    
+    <!-- LEFT SIDEBAR (Matching media_1790966434457.png) -->
+    <aside class="desktop-sidebar">
+      <div class="sidebar-top">
+        
+        <!-- FOVEA Brand Logo -->
+        <div class="sidebar-brand-box">
+          <img src="assets/images/fovea-logo.svg" alt="FOVEA" class="sidebar-logo-img" onerror="this.src='assets/images/fovea-logo.png'" />
+        </div>
+
+        <!-- Navigation Menu -->
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#" id="nav-item-home" class="sidebar-nav-item active" title="Home Dashboard">
+              <!-- Home Icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+              <span>Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" id="nav-item-profile" class="sidebar-nav-item" title="Profile">
+              <!-- Profile Icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Profile</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" id="nav-item-settings" class="sidebar-nav-item" title="Settings">
+              <!-- Settings Gear Icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- User Profile at Bottom of Sidebar -->
+      <div class="sidebar-user-row" id="sidebar-user-profile-btn" style="cursor: pointer;" title="View Profile">
+        <div class="user-avatar-badge">
+          <img src="assets/images/keerthana-avatar-200.png" alt="Keerthana" onerror="this.src='assets/images/avatar.png'" />
+        </div>
+        <div class="user-text-info">
+          <span class="user-welcome-label">Welcome Back!</span>
+          <span class="user-name-strong">Keerthana</span>
+        </div>
+      </div>
+    </aside>
+
+
+    <!-- ==========================================================================
+         MAIN WORKSPACE: TOP BAR + VIEWS
+         ========================================================================== -->
+    <div class="main-workspace">
+      
+      <!-- Top Window Header Bar -->
+      <header class="workspace-top-bar">
+        <!-- macOS-style window control dots -->
+        <div class="window-dots-group">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+
+        <!-- Top Right User Tools (Bell Notification & Avatar) -->
+        <div class="top-tools-group">
+          <button class="bell-notif-btn" title="Notifications" onclick="alert('Notification: Spectacles detected 12m away in Living room.')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="bell-red-dot"></span>
+          </button>
+
+          <div class="header-user-pill" id="header-user-profile-btn" style="cursor: pointer;" title="User Account: Keerthana">
+            <div class="user-initial-circle">K</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- Workspace Scroll Area -->
+      <div class="workspace-scroll-area">
+
+        <!-- ======================================================================
+             VIEW 1: MAIN DASHBOARD (DEFAULT ACTIVE VIEW)
+             ====================================================================== -->
+        <section id="view-dashboard" class="view-section view-active">
+          <div class="dashboard-grid-layout">
+            
+            <!-- Left Column: Model 1, Spects Card, 4 Neon Action Buttons -->
+            <div class="dash-col-left">
+              
+              <!-- Model 1 Glowing Pink Pill Button (Matching Mobile Screenshot) -->
+              <button id="model-pill-main" class="model-pill-button" title="Click to cycle frame models">
+                <span>Model 1</span>
+                <span class="model-pill-sub">Classic Wayfarer Black</span>
+              </button>
+
+              <!-- Spectacles Showcase Card -->
+              <div class="specs-showcase-box">
+                <div class="specs-card-header">
+                  <div class="specs-status-details">
+                    <div class="specs-live-title">
+                      <span class="pulse-dot-green"></span>
+                      <span>Specs connected</span>
+                    </div>
+                    <div class="specs-subtitle-lines">
+                      <span>Last seen: <strong>Just now</strong></span>
+                      <span>Location: <strong>Near you</strong></span>
+                    </div>
+                  </div>
+
+                  <div class="specs-battery-col">
+                    <div class="battery-badge-card">
+                      <div class="battery-box">
+                        <div class="battery-inner"></div>
+                      </div>
+                      <span>78%</span>
+                    </div>
+                    <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">Battery</span>
+                  </div>
+                </div>
+
+                <!-- Spectacles Graphic Stage with Active Glowing Green LED Light -->
+                <div class="spectacles-center-stage">
+                  <img src="assets/images/spectacles-transparent.png" alt="FOVEA Smart Glasses" onerror="this.src='assets/images/spectacles.png'" />
+                  <div id="temple-led-emitter" class="led-temple-light active" title="Temple Strobe Micro-LED"></div>
+                  <div id="acoustic-wave-ring" class="buzzer-sound-wave"></div>
+                </div>
+              </div>
+
+              <!-- The 4 Iconic Bright Neon Buttons (2x2 Grid) -->
+              <div class="neon-cards-grid">
+                
+                <!-- 1. GPS Button (Neon Pink / Red) -->
+                <button id="btn-action-gps" class="neon-card-btn card-gps" title="GPS Satellite Ranging">
+                  <div class="neon-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                  </div>
+                  <span class="neon-card-text">GPS</span>
+                </button>
+
+                <!-- 2. BLE Button (Neon Electric Blue) - TRIGGERS SPECS FOUND TRACING VIEW! -->
+                <button id="btn-action-ble" class="neon-card-btn card-ble" title="Click to Trace Spectacles via BLE">
+                  <div class="neon-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline>
+                    </svg>
+                  </div>
+                  <span class="neon-card-text">BLE</span>
+                </button>
+
+                <!-- 3. Ring the Buzzer Button (Neon Yellow) -->
+                <button id="btn-action-buzzer" class="neon-card-btn card-buzzer" title="Ring 85dB Acoustic Buzzer">
+                  <div class="neon-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                  </div>
+                  <span class="neon-card-text">Ring the Buzzer</span>
+                </button>
+
+                <!-- 4. Turn on the Light Button (Neon Green) -->
+                <button id="btn-action-light" class="neon-card-btn card-light" title="Toggle Temple Micro-LED">
+                  <div class="neon-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
+                    </svg>
+                  </div>
+                  <span class="neon-card-text">Turn on the Light</span>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- Right Column: Live GPS Map, BLE Signal, Activity Stream -->
+            <div class="dash-col-right">
+              
+              <!-- Map Panel -->
+              <div class="dash-panel-box">
+                <div class="panel-title-bar">
+                  <span class="panel-title-h3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    GPS Real-Time Pinpoint
+                  </span>
+                  <span class="panel-pill-tag tag-red">SATELLITE SYNC</span>
+                </div>
+
+                <div class="map-box-view">
+                  <div class="map-target-pulse"></div>
+                  <div class="map-pin-widget">
+                    <div class="pin-circle"></div>
+                    <div class="pin-caption">Living Room • Sofa</div>
+                  </div>
+                </div>
+
+                <div class="gps-readout-grid">
+                  <div><span style="color:#64748b;">LATITUDE:</span> <strong>28.6139° N</strong></div>
+                  <div><span style="color:#64748b;">LONGITUDE:</span> <strong>77.2090° E</strong></div>
+                  <div><span style="color:#64748b;">ACCURACY:</span> <strong style="color:#16a34a;">±2.5m</strong></div>
+                  <div><span style="color:#64748b;">GEOFENCE:</span> <strong style="color:#16a34a;">Safe Zone</strong></div>
+                </div>
+              </div>
+
+              <!-- Activity Stream -->
+              <div class="dash-panel-box">
+                <div class="panel-title-bar">
+                  <span class="panel-title-h3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Activity Log
+                  </span>
+                  <span style="font-family:var(--font-mono); font-size:0.72rem; color:#64748b;">AUTONOMOUS</span>
+                </div>
+                <ul id="activity-feed-list" class="activity-feed-list"></ul>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ======================================================================
+             VIEW 2: "SPECS FOUND" BLE TRACING VIEW (TRIGGERED WHEN CLICKING BLE)
+             Matches media_1790966434457.png with live Bluetooth radar tracing!
+             ====================================================================== -->
+        <section id="view-ble-trace" class="view-section">
+          <div class="ble-trace-main-card">
+            
+            <!-- Top Back Arrow & "Specs Found" Title -->
+            <div class="trace-header-row">
+              <button id="btn-back-to-dashboard" class="trace-back-btn" title="Back to Dashboard">
+                <!-- Back Arrow Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <h2 class="trace-title">Specs Found</h2>
+            </div>
+
+            <!-- Concentric Soft Blue Radar Waves with Center Bluetooth Beacon -->
+            <div class="trace-sonar-stage">
+              <div class="concentric-radar-wrap">
+                <div class="radar-circle-layer radar-layer-1"></div>
+                <div class="radar-circle-layer radar-layer-2"></div>
+                <div class="radar-circle-layer radar-layer-3"></div>
+
+                <!-- Center Blue Circle with Bluetooth Icon -->
+                <div id="center-bluetooth-beacon" class="center-bluetooth-beacon tracing" title="BLE Beacon Active">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Bluetooth Connected Pill Badge -->
+              <div class="bluetooth-connected-pill">
+                <span class="badge-check-icon">✓</span>
+                <span>Bluetooth Connected</span>
+              </div>
+            </div>
+
+            <!-- Status Banner Card (Mint Green Card) -->
+            <div class="trace-status-mint-card">
+              <div class="mint-card-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+
+              <div class="mint-card-content">
+                <h3 id="trace-distance-heading" class="mint-card-heading">Found - 12 m away</h3>
+                <span id="trace-signal-meta" class="mint-card-meta">Updated just now · Signal strong</span>
+                <span class="mint-card-meta">Near: Living room</span>
+              </div>
+            </div>
+
+            <!-- Tracing Action Buttons -->
+            <div class="trace-actions-group">
+              
+              <!-- Primary: Play Sound on Specs (Glowing Pink Pill) -->
+              <button id="btn-play-sound-specs" class="btn-play-sound-specs">
+                <span class="btn-icon-play-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </span>
+                <span>Play Sound on Specs</span>
+              </button>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ======================================================================
+             VIEW 3: "GPS TRIGGERED!" CAMPUS MAP VIEW (TRIGGERED WHEN CLICKING GPS)
+             Matches media_1790967502467.png with IIITDM Jabalpur campus map
+             ====================================================================== -->
+        <section id="view-gps-trigger" class="view-section">
+          <div class="gps-view-container">
+
+            <!-- 1. Top Green Success Banner -->
+            <div class="gps-success-banner">
+              <div class="gps-success-left">
+                <div class="gps-banner-pin-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+                <div class="gps-banner-texts">
+                  <h2 class="gps-banner-title">GPS Triggered!</h2>
+                  <p class="gps-banner-subtitle">Location detected successfully</p>
+                </div>
+              </div>
+              <div class="gps-success-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- 2. Campus Map Viewport Card with Floating Location & Controls -->
+            <div class="gps-map-card">
+              <div class="gps-map-viewport" id="gps-map-viewport">
+                <img src="assets/images/campus-map-reference.png" alt="IIITDM Jabalpur Campus Map" class="gps-campus-map-img" id="gps-campus-map-img" />
+                
+                <!-- Live Beacon Pulse on Center Fix Marker -->
+                <div class="gps-pin-pulse-beacon" id="gps-pin-beacon">
+                  <div class="beacon-pulse-ring ring-1"></div>
+                  <div class="beacon-pulse-ring ring-2"></div>
+                </div>
+              </div>
+
+              <!-- Interactive Floating Map Controls on Top-Right -->
+              <div class="gps-floating-controls">
+                <button class="gps-control-circle-btn" id="btn-gps-recenter" title="Recenter to Specs Location">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0077ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="22" y1="12" x2="18" y2="12"></line>
+                    <line x1="6" y1="12" x2="2" y2="12"></line>
+                    <line x1="12" y1="6" x2="12" y2="2"></line>
+                    <line x1="12" y1="22" x2="12" y2="18"></line>
+                    <circle cx="12" cy="12" r="3" fill="#0077ff"></circle>
+                  </svg>
+                </button>
+
+                <div class="gps-control-zoom-pill">
+                  <button class="gps-zoom-btn" id="btn-gps-zoom-in" title="Zoom In">+</button>
+                  <div class="gps-zoom-sep"></div>
+                  <button class="gps-zoom-btn" id="btn-gps-zoom-out" title="Zoom Out">−</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Bottom Neon Pink "View on Full Map" Action Button -->
+            <button id="btn-view-full-map" class="btn-view-full-map" title="Open High-Precision GPS in Maps">
+              <div class="btn-full-map-center-group">
+                <div class="map-icon-pin-combo">
+                  <svg class="icon-folded-map" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                    <line x1="9" y1="3" x2="9" y2="18"></line>
+                    <line x1="15" y1="6" x2="15" y2="21"></line>
+                  </svg>
+                  <svg class="icon-pin-marker" viewBox="0 0 24 24" fill="#ffffff">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+                <div class="btn-map-v-divider"></div>
+                <span class="btn-map-title">View on Full Map</span>
+              </div>
+              <div class="btn-map-arrow-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </button>
+
+          </div>
+        </section>
+
+
+        <!-- ======================================================================
+             VIEW 4: "PROFILE" SCREEN (MATCHING MEDIA_1790969389054.PNG)
+             View and manage personal information, avatar, and quick actions
+             ====================================================================== -->
+        <section id="view-profile" class="view-section">
+          <div class="profile-view-container">
+
+            <!-- 1. Page Header (Icon + Title + Subtitle) -->
+            <div class="profile-page-header">
+              <div class="profile-header-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="profile-header-texts">
+                <h1 class="profile-page-title">Profile</h1>
+                <p class="profile-page-subtitle">View and manage your personal information</p>
+              </div>
+            </div>
+
+            <!-- 2. Hero Gradient Banner Card -->
+            <div class="profile-hero-card">
+              <div class="hero-card-left">
+                <!-- Avatar with Camera Badge Overlay -->
+                <div class="hero-avatar-wrapper">
+                  <img src="assets/images/keerthana-avatar-200.png" alt="Keerthana Profile" class="hero-avatar-img" id="hero-avatar-img" />
+                  <button class="hero-camera-badge" id="btn-hero-change-photo" title="Upload new photo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- User Meta Information -->
+                <div class="hero-user-meta">
+                  <h2 class="hero-user-name" id="profile-display-name">Keerthana</h2>
+                  <div class="hero-meta-row">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span id="profile-display-email">keeerthana@example.com</span>
+                  </div>
+                  <div class="hero-meta-row">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span id="profile-display-location">Jabalpur, Madhya Pradesh</span>
+                  </div>
+                  <div class="hero-status-pill">
+                    <span class="status-dot-green"></span>
+                    <span>Online</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: "Explore More with FOVEA" Branding Badge -->
+              <div class="hero-card-right">
+                <div class="explore-fovea-badge">
+                  <div class="explore-eye-icon-box">
+                    <svg class="explore-eye-svg" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3" fill="#0f172a"></circle>
+                    </svg>
+                    <span class="explore-sparkle-1">✦</span>
+                    <span class="explore-sparkle-2">✦</span>
+                  </div>
+                  <span class="explore-title-text">Explore More</span>
+                  <div class="explore-fovea-row">
+                    <span class="explore-brand-text">with FOVEA</span>
+                    <div class="explore-pink-underline"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Two Column Content Grid -->
+            <div class="profile-cards-grid">
+              
+              <!-- Left Column: Personal Information Card -->
+              <div class="profile-info-card">
+                <div class="info-card-header">
+                  <div class="info-header-left">
+                    <div class="info-header-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
+                    <h3 class="info-card-title">Personal Information</h3>
+                  </div>
+                  <button class="btn-info-edit" id="btn-edit-personal-info" title="Edit Profile Details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    <span>Edit</span>
+                  </button>
+                </div>
+
+                <!-- Info List Rows -->
+                <div class="personal-info-rows">
+                  
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#64748b">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                      </svg>
+                      <span>Full Name</span>
+                    </div>
+                    <div class="info-row-value" id="val-full-name">Keerthana</div>
+                  </div>
+
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                      <span>Email Address</span>
+                    </div>
+                    <div class="info-row-value" id="val-email">keeerthana@example.com</div>
+                  </div>
+
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                      <span>Phone Number</span>
+                    </div>
+                    <div class="info-row-value" id="val-phone">+91 98765 43210</div>
+                  </div>
+
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                      <span>Location</span>
+                    </div>
+                    <div class="info-row-value" id="val-location">Jabalpur, Madhya Pradesh</div>
+                  </div>
+
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                      <span>Date of Birth</span>
+                    </div>
+                    <div class="info-row-value" id="val-dob">12 Jan 2005</div>
+                  </div>
+
+                  <div class="info-row-item">
+                    <div class="info-row-label">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                      </svg>
+                      <span>Gender</span>
+                    </div>
+                    <div class="info-row-value" id="val-gender">Female</div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Right Column: Profile Photo Card & Quick Actions Card -->
+              <div class="profile-side-col">
+                
+                <!-- Card 1: Profile Photo Card -->
+                <div class="profile-side-card">
+                  <div class="side-card-header">
+                    <div class="side-header-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </div>
+                    <h3 class="side-card-title">Profile Photo</h3>
+                  </div>
+
+                  <div class="photo-card-body">
+                    <div class="photo-card-avatar-box">
+                      <img src="assets/images/keerthana-avatar-200.png" alt="Keerthana" class="photo-card-img" id="card-avatar-img" />
+                    </div>
+
+                    <button class="btn-change-photo" id="btn-change-photo" title="Choose image from device">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                      </svg>
+                      <span>Change Photo</span>
+                    </button>
+                    <!-- Hidden file input for uploading photo -->
+                    <input type="file" id="profile-photo-input" accept="image/*" style="display:none;" />
+
+                    <div class="photo-guidelines">
+                      <span>Recommended size: 200 x 200 px</span>
+                      <span>JPG, PNG (Max 2MB)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2: Quick Actions Card -->
+                <div class="profile-side-card">
+                  <div class="side-card-header">
+                    <div class="side-header-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                    </div>
+                    <h3 class="side-card-title">Quick Actions</h3>
+                  </div>
+
+                  <div class="quick-actions-list">
+                    <!-- Action 1: Update Profile (Pink) -->
+                    <button class="quick-action-btn action-update" id="btn-action-update-profile" title="Edit your account profile">
+                      <div class="quick-action-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 20h9"></path>
+                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                        <span>Update Profile</span>
+                      </div>
+                      <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+
+                    <!-- Action 2: Change Password (Blue) -->
+                    <button class="quick-action-btn action-password" id="btn-action-change-password" title="Update account credentials">
+                      <div class="quick-action-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <span>Change Password</span>
+                      </div>
+                      <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+
+                    <!-- Action 3: Log Out (Purple) -->
+                    <button class="quick-action-btn action-logout" id="btn-action-logout" title="Sign out of FOVEA">
+                      <div class="quick-action-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                          <polyline points="16 17 21 12 16 7"></polyline>
+                          <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span>Log Out</span>
+                      </div>
+                      <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ======================================================================
+             VIEW 5: "SETTINGS" SCREEN (MATCHING MEDIA_1790970747527.PNG)
+             Except profile information, implements everything!
+             ====================================================================== -->
+        <section id="view-settings" class="view-section">
+          <div class="settings-view-container">
+
+            <!-- 1. Header (Gear Icon + Title + Subtitle) -->
+            <div class="settings-page-header">
+              <div class="settings-header-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <div class="settings-header-texts">
+                <h1 class="settings-page-title">Settings</h1>
+                <p class="settings-page-subtitle">Manage your account, preferences and app settings</p>
+              </div>
+            </div>
+
+            <!-- 2. Main Two-Column Settings Card -->
+            <div class="settings-main-card">
+              
+              <!-- Left Inner Settings Navigation Tabs -->
+              <div class="settings-nav-sidebar">
+                <button class="settings-tab-btn active" data-tab="account" title="Account & Profile Settings">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span>Profile</span>
+                  </div>
+                  <svg class="tab-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+
+                <button class="settings-tab-btn" data-tab="notifications" title="Manage Notifications">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                      <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span>Notifications</span>
+                  </div>
+                </button>
+
+                <button class="settings-tab-btn" data-tab="privacy" title="Privacy and Data">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span>Privacy</span>
+                  </div>
+                </button>
+
+                <button class="settings-tab-btn" data-tab="preferences" title="App and Device Preferences">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="4" y1="21" x2="4" y2="14"></line>
+                      <line x1="4" y1="10" x2="4" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12" y2="3"></line>
+                      <line x1="20" y1="21" x2="20" y2="16"></line>
+                      <line x1="20" y1="12" x2="20" y2="3"></line>
+                      <line x1="1" y1="14" x2="7" y2="14"></line>
+                      <line x1="9" y1="8" x2="15" y2="8"></line>
+                      <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                    <span>App Preferences</span>
+                  </div>
+                </button>
+
+                <button class="settings-tab-btn" data-tab="help" title="Help & Support Guide">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Help & Support</span>
+                  </div>
+                </button>
+
+                <button class="settings-tab-btn" data-tab="about" title="About FOVEA Spects Finder">
+                  <div class="tab-btn-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>About</span>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Right Inner Settings Content Area -->
+              <div class="settings-content-pane">
+                
+                <!-- TAB 1: ACCOUNT SETTINGS (Default Tab Matching Screenshot, except profile information) -->
+                <div class="settings-subpane active" id="pane-account">
+                  
+                  <!-- Top User Card Header (Avatar + Name + Email + Edit Button) -->
+                  <div class="settings-user-header-row">
+                    <div class="settings-user-summary">
+                      <div class="settings-user-avatar-circle">
+                        <img src="assets/images/keerthana-avatar-200.png" alt="Keerthana" onerror="this.src='assets/images/avatar.png'" />
+                      </div>
+                      <div class="settings-user-identity">
+                        <h2 class="settings-username">Keerthana</h2>
+                        <span class="settings-useremail">keerthana123@gmail.com</span>
+                      </div>
+                    </div>
+                    
+                    <button class="settings-edit-pill-btn" id="btn-settings-edit-profile" title="Quick edit identity">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                      </svg>
+                      <span>Edit</span>
+                    </button>
+                  </div>
+
+                  <!-- Account Settings Section (Except profile information!) -->
+                  <div class="settings-section-block">
+                    <h3 class="settings-section-title">Account Settings</h3>
+                    
+                    <div class="settings-card-table">
+                      
+                      <!-- Row 1: Change Password -->
+                      <div class="settings-table-row" id="row-settings-change-password" style="cursor:pointer;">
+                        <div class="table-row-left">
+                          <div class="table-row-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                          </div>
+                          <span class="table-row-label">Change Password</span>
+                        </div>
+                        <svg class="table-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </div>
+
+                      <!-- Row 2: Two-Factor Authentication with Toggle -->
+                      <div class="settings-table-row">
+                        <div class="table-row-left">
+                          <div class="table-row-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                          </div>
+                          <span class="table-row-label">Two-Factor Authentication</span>
+                        </div>
+                        <div class="table-row-action">
+                          <label class="switch-toggle" title="Toggle Two-Factor Authentication">
+                            <input type="checkbox" id="toggle-settings-2fa" checked />
+                            <span class="switch-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <!-- Row 3: Login Activity -->
+                      <div class="settings-table-row" id="row-settings-login-activity" style="cursor:pointer;">
+                        <div class="table-row-left">
+                          <div class="table-row-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                          </div>
+                          <span class="table-row-label">Login Activity</span>
+                        </div>
+                        <svg class="table-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Log Out Banner Button (Soft Pink Matching Reference) -->
+                  <button class="settings-logout-banner-btn" id="btn-settings-logout-banner" title="Sign out of your session">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff007f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Log Out</span>
+                  </button>
+
+                </div>
+
+                <!-- TAB 2: NOTIFICATIONS -->
+                <div class="settings-subpane" id="pane-notifications">
+                  <h3 class="settings-section-title">Notification Preferences</h3>
+                  <div class="settings-card-table">
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Lost Specs Push Alerts</span>
+                      </div>
+                      <label class="switch-toggle"><input type="checkbox" checked><span class="switch-slider"></span></label>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Proximity Radar Sound Signals</span>
+                      </div>
+                      <label class="switch-toggle"><input type="checkbox" checked><span class="switch-slider"></span></label>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Battery Level Warning (&lt; 20%)</span>
+                      </div>
+                      <label class="switch-toggle"><input type="checkbox" checked><span class="switch-slider"></span></label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 3: PRIVACY -->
+                <div class="settings-subpane" id="pane-privacy">
+                  <h3 class="settings-section-title">Privacy & Safety</h3>
+                  <div class="settings-card-table">
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Continuous Geofence Background Tracking</span>
+                      </div>
+                      <label class="switch-toggle"><input type="checkbox" checked><span class="switch-slider"></span></label>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Anonymized BLE Signal Analytics</span>
+                      </div>
+                      <label class="switch-toggle"><input type="checkbox"><span class="switch-slider"></span></label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 4: APP PREFERENCES -->
+                <div class="settings-subpane" id="pane-preferences">
+                  <h3 class="settings-section-title">Device & App Preferences</h3>
+                  <div class="settings-card-table">
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Eyewear Model Profile Default</span>
+                      </div>
+                      <span style="font-weight:700; color:#ff007f;">Model 1 (Wayfarer)</span>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Buzzer Volume Intensity</span>
+                      </div>
+                      <span style="font-weight:700; color:#10b981;">85 dB (High Pitch)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 5: HELP & SUPPORT -->
+                <div class="settings-subpane" id="pane-help">
+                  <h3 class="settings-section-title">Help & Troubleshooting</h3>
+                  <div class="settings-card-table">
+                    <div class="settings-table-row" id="row-help-guide" style="cursor:pointer;">
+                      <div class="table-row-left">
+                        <span class="table-row-label">How to pair new FOVEA smart frames</span>
+                      </div>
+                      <svg class="table-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                    <div class="settings-table-row" id="row-help-contact" style="cursor:pointer;">
+                      <div class="table-row-left">
+                        <span class="table-row-label">Contact Engineering Support</span>
+                      </div>
+                      <svg class="table-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 6: ABOUT -->
+                <div class="settings-subpane" id="pane-about">
+                  <h3 class="settings-section-title">About FOVEA Spects Finder</h3>
+                  <div class="settings-card-table">
+                    <div class="settings-table-row">
+                      <div class="table-row-left"><span class="table-row-label">Application Version</span></div>
+                      <span style="font-family:var(--font-mono); font-weight:700;">v2.4.0 Desktop Build</span>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left"><span class="table-row-label">Hardware Firmware</span></div>
+                      <span style="font-family:var(--font-mono); font-weight:700;">FW-ESP32-v1.8</span>
+                    </div>
+                    <div class="settings-table-row">
+                      <div class="table-row-left"><span class="table-row-label">Campus Location</span></div>
+                      <span style="font-weight:600;">IIITDM Jabalpur</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Audio and Controller Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

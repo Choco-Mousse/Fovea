@@ -1,0 +1,19 @@
+{
+  "name": "fovea-mern-spects-finder",
+  "version": "2.0.0",
+  "description": "FOVEA - Spects Finder & Optical Companion (Full MERN Stack)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mern",
+    "mongodb",
+    "express",
+    "react",
+    "nodejs",
+    "spectacles-finder",
+    "edp"
+  ],
+  "author": "FOVEA Engineering Team",
+  "license": "MIT"
+}
